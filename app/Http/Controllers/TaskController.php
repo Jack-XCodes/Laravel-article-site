@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Inertia\Inertia;
 
 class TaskController extends Controller
 {
@@ -15,7 +14,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = auth()->user()->tasks()->latest()->get();
-        return Inertia::render('tasks/index', compact('tasks'));
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -23,7 +22,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return Inertia::render('tasks/create');
+        return view('tasks.create');
     }
 
     /**
@@ -47,7 +46,7 @@ class TaskController extends Controller
     public function edit(string $id)
     {
         $task = Task::findOrFail($id);
-        return Inertia::render('tasks/edit', compact('task'));
+        return view('tasks.edit', compact('task'));
     }
 
     /**
